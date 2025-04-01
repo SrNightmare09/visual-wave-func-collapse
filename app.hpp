@@ -25,4 +25,6 @@ private:
     std::vector<std::vector<int>> map;
     void collapse(int row, int col);
     void initVec();
+    int getWindowWidth();
+    int getWindowHeight();
 };

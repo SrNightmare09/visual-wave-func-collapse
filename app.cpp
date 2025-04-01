@@ -7,7 +7,7 @@
 
 using namespace util;
 
-enum {
+enum TileType {
     BLANK,
     UP,
     RIGHT,
@@ -47,6 +47,18 @@ int App::getRefreshRate() {
 
 void App::clear() {
     SDL_RenderClear(this->renderer);
+}
+
+int App::getWindowWidth() {
+    int width;
+    SDL_GetWindowSize(this->window, &width, nullptr);
+    return width;
+}
+
+int App::getWindowHeight() {
+    int height;
+    SDL_GetWindowSize(this->window, nullptr, &height);
+    return height;
 }
 
 void App::render(Entity& entity) {
@@ -123,19 +135,15 @@ void App::initTiles() {
 }
 
 void App::initVec() {
-    int winWidth;
-    int winHeight;
-    int tileSize = Entity::getTileSize();
+    const int tileSize = Entity::getTileSize();
 
-    SDL_GetWindowSize(window, &winWidth, &winHeight);
-
-    map.resize(winHeight / tileSize);
-    for (int i = 0; i < winHeight / tileSize; i++) {
-        map[i].resize(winWidth / tileSize);
+    map.resize(this->getWindowHeight() / tileSize);
+    for (int i = 0; i < this->getWindowHeight() / tileSize; i++) {
+        map[i].resize(this->getWindowWidth() / tileSize);
     }
 
-    for (int i = 0; i < winHeight / tileSize; i++) {
-        for (int j = 0; j < winWidth / tileSize; j++) {
+    for (int i = 0; i < this->getWindowHeight() / tileSize; i++) {
+        for (int j = 0; j < this->getWindowWidth() / tileSize; j++) {
             map[i][j] = 0;
         }
     }
@@ -143,16 +151,12 @@ void App::initVec() {
 
 void App::mapTiles() {
 
-    int winWidth;
-    int winHeight;
-    int tileSize = Entity::getTileSize();
+    const int tileSize = Entity::getTileSize();
 
     initVec();
 
-    SDL_GetWindowSize(window, &winWidth, &winHeight);
-
-    for (int row = 0; row < winHeight / tileSize; row++) {
-        for (int col = 0; col < winWidth / tileSize; col++) {
+    for (int row = 0; row < this->getWindowHeight() / tileSize; row++) {
+        for (int col = 0; col < this->getWindowWidth() / tileSize; col++) {
 
             // tile at (0, 0) is selected at random as seed
             if (row == 0 && col == 0) {
@@ -169,13 +173,11 @@ void App::mapTiles() {
 }
 
 void App::showTiles() {
-    int winWidth;
-    int winHeight;
-    int tileSize = Entity::getTileSize();
-    SDL_GetWindowSize(window, &winWidth, &winHeight);
 
-    for (int yPos = 0; yPos < winHeight; yPos += tileSize) {
-        for (int xPos = 0; xPos < winWidth; xPos += tileSize) {
+    const int tileSize = Entity::getTileSize();
+
+    for (int yPos = 0; yPos < this->getWindowHeight(); yPos += tileSize) {
+        for (int xPos = 0; xPos < this->getWindowWidth(); xPos += tileSize) {
 
             int row = yPos / tileSize;
             int col = xPos / tileSize;
@@ -190,11 +192,6 @@ void App::showTiles() {
 }
 
 void App::collapse(int row, int col) {
-
-    constexpr int tileSize = 40;
-    int winWidth;
-    int winHeight;
-    SDL_GetWindowSize(this->window, &winWidth, &winHeight);
 
     if (row == 0) { // top row logic
 
