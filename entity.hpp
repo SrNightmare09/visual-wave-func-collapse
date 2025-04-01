@@ -11,9 +11,11 @@ public:
     void setY(float y);
     SDL_Rect getRect();
     SDL_Texture* getTexture();
+    static int getTileSize();
 private:
     float x;
     float y;
     SDL_Texture* texture;
     SDL_Rect rect;
+    static int tileSize;
 };

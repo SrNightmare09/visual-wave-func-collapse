@@ -14,8 +14,6 @@ public:
     void render(Entity& entity);
     void display();
     SDL_Texture* loadTexture(const char* filepath);
-    SDL_Window* getWindow();
-    SDL_Renderer* getRenderer();
     void initTiles();
     void showTiles();
     void mapTiles();

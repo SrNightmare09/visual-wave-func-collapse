@@ -45,14 +45,6 @@ int App::getRefreshRate() {
     return mode.refresh_rate;
 }
 
-SDL_Window* App::getWindow() {
-    return this->window;
-}
-
-SDL_Renderer* App::getRenderer() {
-    return this->renderer;
-}
-
 void App::clear() {
     SDL_RenderClear(this->renderer);
 }
@@ -74,8 +66,8 @@ void App::render(Entity& entity) {
     SDL_Rect dest;
     dest.x = entity.getX();
     dest.y = entity.getY();
-    dest.w = 40;
-    dest.h = 40;
+    dest.w = Entity::getTileSize();
+    dest.h = Entity::getTileSize();
 
     SDL_RenderCopy(this->renderer, entity.getTexture(), &source, &dest);
 
@@ -133,7 +125,7 @@ void App::initTiles() {
 void App::initVec() {
     int winWidth;
     int winHeight;
-    int tileSize = 40;
+    int tileSize = Entity::getTileSize();
 
     SDL_GetWindowSize(window, &winWidth, &winHeight);
 
@@ -153,7 +145,7 @@ void App::mapTiles() {
 
     int winWidth;
     int winHeight;
-    int tileSize = 40;
+    int tileSize = Entity::getTileSize();
 
     initVec();
 
@@ -179,7 +171,7 @@ void App::mapTiles() {
 void App::showTiles() {
     int winWidth;
     int winHeight;
-    int tileSize = 40;
+    int tileSize = Entity::getTileSize();
     SDL_GetWindowSize(window, &winWidth, &winHeight);
 
     for (int yPos = 0; yPos < winHeight; yPos += tileSize) {
