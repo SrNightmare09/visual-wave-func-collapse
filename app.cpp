@@ -74,8 +74,8 @@ void App::render(Entity& entity) {
     SDL_Rect dest;
     dest.x = entity.getX();
     dest.y = entity.getY();
-    dest.w = textureWidth;
-    dest.h = textureHeight;
+    dest.w = 40;
+    dest.h = 40;
 
     SDL_RenderCopy(this->renderer, entity.getTexture(), &source, &dest);
 
@@ -175,7 +175,6 @@ void App::mapTiles() {
         }
     }
 }
-
 
 void App::showTiles() {
     int winWidth;
