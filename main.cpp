@@ -38,6 +38,7 @@ int main(int argc, char* argv[]) {
 
         while (accumulator >= deltaTime) {
             while (SDL_PollEvent(&e)) {
+
                 switch (e.type) {
                 case SDL_QUIT:
                     running = false;
@@ -50,6 +51,7 @@ int main(int argc, char* argv[]) {
                         app.showTiles();
                     }
                 }
+
             }
             accumulator -= deltaTime;
         }
@@ -62,6 +64,6 @@ int main(int argc, char* argv[]) {
             SDL_Delay(1000 / (app.getRefreshRate() - frameTicks));
         }
     }
-
+    
     return app.close();
 }

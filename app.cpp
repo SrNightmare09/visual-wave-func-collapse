@@ -99,6 +99,9 @@ SDL_Texture* App::loadTexture(const char* filepath) {
 }
 
 void App::initTiles(int tileSize) {
+
+    Entity::setTileSize(tileSize);
+
     // init textures
 
     SDL_Texture* blankTexture = this->loadTexture("assets/blank.png");
@@ -112,8 +115,6 @@ void App::initTiles(int tileSize) {
     Entity* right = new Entity(0.0f, 0.0f, rightTexture);
     Entity* down = new Entity(0.0f, 0.0f, downTexture);
     Entity* left = new Entity(0.0f, 0.0f, leftTexture);
-
-    Entity::setTileSize(tileSize);
 
     tiles.resize(5);
 
@@ -136,7 +137,7 @@ void App::initTiles(int tileSize) {
 
 }
 
-void App::initVec() {
+void App::initMap() {
     const int tileSize = Entity::getTileSize();
 
     map.resize(this->getWindowHeight() / tileSize);
@@ -153,9 +154,9 @@ void App::initVec() {
 
 void App::mapTiles() {
 
-    const int tileSize = Entity::getTileSize();
+    this->initMap();
 
-    initVec();
+    const int tileSize = Entity::getTileSize();
 
     for (int row = 0; row < this->getWindowHeight() / tileSize; row++) {
         for (int col = 0; col < this->getWindowWidth() / tileSize; col++) {
@@ -224,13 +225,11 @@ void App::collapse(int row, int col) {
 
             if (connection == choice) {
                 isValid = true;
-                // add the choice to the map
 
+                // add the choice to the map
                 map[row][col] = randNum;
             }
-
         }
-
     }
 
     else if (col == 0) { // left most column logic
@@ -262,13 +261,11 @@ void App::collapse(int row, int col) {
 
             if (connection == choice) {
                 isValid = true;
-                // add the choice to the map
 
+                // add the choice to the map
                 map[row][col] = randNum;
             }
-
         }
-
     }
 
     else { // everything else
@@ -308,12 +305,10 @@ void App::collapse(int row, int col) {
 
             if (connectionLeft == choiceLeft && connectionTop == choiceTop) {
                 isValid = true;
-                // add the choice to the map
 
+                // add the choice to the map
                 map[row][col] = randNum;
             }
         }
-
     }
-
 }

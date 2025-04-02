@@ -1,7 +1,7 @@
 #include "app.hpp"
 
-#include <random>
 #include <iostream>
+#include <random>
 #include <SDL2/SDL_image.h>
 
 namespace util {

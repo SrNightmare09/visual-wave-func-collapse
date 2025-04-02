@@ -13,6 +13,7 @@ public:
     SDL_Texture* getTexture();
     static int getTileSize();
     static void setTileSize(int size);
+
 private:
     float x;
     float y;
