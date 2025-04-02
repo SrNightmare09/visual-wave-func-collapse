@@ -4,14 +4,22 @@
 
 #include "app.hpp"
 
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 360
-
 int main(int argc, char* argv[]) {
 
+    struct Params {
+        int winWidth = 640;
+        int winHeight = 360;
+        int tileSize = 40;
+    };
+
+    Params par;
+    par.winWidth = 1280;
+    par.winHeight = 720;
+    par.tileSize = 16;
+
     App app;
-    app.init(WINDOW_WIDTH, WINDOW_HEIGHT);
-    app.initTiles();
+    app.init(par.winWidth, par.winHeight);
+    app.initTiles(par.tileSize);
 
     bool running = true;
     SDL_Event e;

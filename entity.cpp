@@ -1,6 +1,6 @@
 #include "entity.hpp"
 
-int Entity::tileSize = 40;
+int Entity::tileSize = 0;
 
 Entity::Entity(float x, float y, SDL_Texture* texture) {
     this->x = x;
@@ -40,4 +40,8 @@ SDL_Texture* Entity::getTexture() {
 
 int Entity::getTileSize() {
     return tileSize;
+}
+
+void Entity::setTileSize(int size) {
+    tileSize = size;
 }

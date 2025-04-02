@@ -14,7 +14,7 @@ public:
     void render(Entity& entity);
     void display();
     SDL_Texture* loadTexture(const char* filepath);
-    void initTiles();
+    void initTiles(int tileSize);
     void showTiles();
     void mapTiles();
 private:

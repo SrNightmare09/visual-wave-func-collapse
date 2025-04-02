@@ -20,7 +20,7 @@ void App::init(int width, int height) {
         std::cout << "Could not initialize SDL video! Err: " << SDL_GetError() << std::endl;
     }
 
-    this->window = SDL_CreateWindow("Wave Function Collapse [ Press Enter to generate! ]", 200, 200, width, height, SDL_WINDOW_SHOWN);
+    this->window = SDL_CreateWindow("Wave Function Collapse [ Press Enter to generate! ]", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     if (this->window == NULL) {
         std::cout << "Could not load window" << SDL_GetError() << std::endl;
     }
@@ -98,7 +98,7 @@ SDL_Texture* App::loadTexture(const char* filepath) {
     return texture;
 }
 
-void App::initTiles() {
+void App::initTiles(int tileSize) {
     // init textures
 
     SDL_Texture* blankTexture = this->loadTexture("assets/blank.png");
@@ -112,6 +112,8 @@ void App::initTiles() {
     Entity* right = new Entity(0.0f, 0.0f, rightTexture);
     Entity* down = new Entity(0.0f, 0.0f, downTexture);
     Entity* left = new Entity(0.0f, 0.0f, leftTexture);
+
+    Entity::setTileSize(tileSize);
 
     tiles.resize(5);
 
